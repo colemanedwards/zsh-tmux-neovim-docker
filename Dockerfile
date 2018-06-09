@@ -68,14 +68,8 @@ RUN apt-get install -y \
       python3 \
       python3-pip \
       unzip
-RUN pip3 install --upgrade pip &&\ 
-    pip3 install --user neovim jedi mistune psutil setproctitle
-WORKDIR /usr/local/src
-RUN git clone --depth 1 https://github.com/neovim/neovim.git
-WORKDIR /usr/local/src/neovim
-RUN git fetch --depth 1 origin tag v0.2.0
-RUN git reset --hard v0.2.0
-RUN make CMAKE_BUILD_TYPE=Release
-RUN make install
-RUN rm -rf /usr/local/src/neovim
+RUN apt-add-repository ppa:neovim-ppa/stable
+RUN apt-get update
+RUN apt-get install -y neovim
+
 
